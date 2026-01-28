@@ -1,4 +1,4 @@
-import { ApiError, ValidationError } from "../../utils/errors";
+import { ApiError, ValidationError } from "@utils/errors";
 
 type OwmForecastResponse = {
   list: Array<{
@@ -27,10 +27,15 @@ export class OpenWeatherMapClient {
     this.baseUrl = opts.baseUrl ?? "https://api.openweathermap.org/data/2.5";
   }
 
-  async getForecastByCity(params: { city: string; stateCode: string }): Promise<ForecastSample> {
+  async getForecastByCity(params: {
+    city: string;
+    stateCode: string;
+  }): Promise<ForecastSample> {
     const apiKey = this.opts.apiKey?.trim();
     if (!apiKey) {
-      throw new ValidationError("Missing API key. Add VITE_OWM_API_KEY to your .env (see .env.example).");
+      throw new ValidationError(
+        "Missing API key. Add VITE_OWM_API_KEY to your .env (see .env.example)."
+      );
     }
 
     const q = `${params.city},${params.stateCode},US`;
@@ -40,7 +45,10 @@ export class OpenWeatherMapClient {
     url.searchParams.set("units", "metric");
 
     const res = await fetch(url.toString());
-    if (!res.ok) throw new ApiError(`OpenWeatherMap failed for "${q}" (HTTP ${res.status}).`);
+    if (!res.ok)
+      throw new ApiError(
+        `OpenWeatherMap failed for "${q}" (HTTP ${res.status}).`
+      );
 
     const data = (await res.json()) as OwmForecastResponse;
     const first = data.list?.[0];

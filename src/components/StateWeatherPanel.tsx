@@ -1,4 +1,4 @@
-import type { StateWeatherResult } from "../domain/StateWeatherResult";
+import type { StateWeatherResult } from "@domain/StateWeatherResult";
 import { CityMetricsChart } from "./charts/CityMetricsChart";
 import { CityMetricsTable } from "./tables/CityMetricsTable";
 

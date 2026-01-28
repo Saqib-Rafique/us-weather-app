@@ -1,5 +1,14 @@
-import type { CityWeatherSnapshot } from "../../domain/CityWeatherSnapshot";
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import type { CityWeatherSnapshot } from "@domain/CityWeatherSnapshot";
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 type Props = { snapshots: CityWeatherSnapshot[] };
 
@@ -13,9 +22,17 @@ export function CityMetricsChart({ snapshots }: Props) {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data} margin={{ top: 10, right: 40, left: 10, bottom: 20 }}>
+      <LineChart
+        data={data}
+        margin={{ top: 10, right: 40, left: 10, bottom: 20 }}
+      >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="city" interval={0} height={60} padding={{ left: 20, right: 20 }} />
+        <XAxis
+          dataKey="city"
+          interval={0}
+          height={60}
+          padding={{ left: 20, right: 20 }}
+        />
         <YAxis />
         <Tooltip />
         <Legend />

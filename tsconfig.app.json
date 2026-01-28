@@ -16,7 +16,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@domain/*": ["domain/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"],
+      "@styles/*": ["styles/*"],
+      "@data/*": ["data/*"]
+    }
   },
   "include": ["src"]
 }

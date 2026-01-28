@@ -189,17 +189,3 @@ body {
 .kv b {
   font-size: 14px;
 }
-
-.tableWrap {
-  width: 100%;
-  overflow-x: auto;
-  margin-top: 14px;
-  border-radius: 12px;
-}
-
-@media (max-width: 640px) {
-  .table th,
-  .table td {
-    white-space: nowrap;
-  }
-}

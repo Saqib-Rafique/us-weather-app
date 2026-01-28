@@ -1,4 +1,4 @@
-import type { CityWeatherSnapshot } from "../../domain/CityWeatherSnapshot";
+import type { CityWeatherSnapshot } from "@domain/CityWeatherSnapshot";
 
 type Props = { snapshots: CityWeatherSnapshot[] };
 

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { ValidationError, ApiError } from "../utils/errors";
+import { ValidationError, ApiError } from "@utils/errors";
 
 type Props = {
   onSearch: (stateName: string) => Promise<void>;
@@ -10,7 +10,10 @@ export function StateSearchForm({ onSearch }: Props) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const canSubmit = useMemo(() => value.trim().length > 0 && !busy, [value, busy]);
+  const canSubmit = useMemo(
+    () => value.trim().length > 0 && !busy,
+    [value, busy]
+  );
 
   async function submit() {
     setError(null);
@@ -20,7 +23,9 @@ export function StateSearchForm({ onSearch }: Props) {
       setValue("");
     } catch (e) {
       const msg =
-        e instanceof ValidationError || e instanceof ApiError || e instanceof Error
+        e instanceof ValidationError ||
+        e instanceof ApiError ||
+        e instanceof Error
           ? e.message
           : "Unexpected error";
       setError(msg);
