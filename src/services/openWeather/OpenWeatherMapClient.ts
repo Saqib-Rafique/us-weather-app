@@ -1,4 +1,4 @@
-import { ApiError, ValidationError } from "@utils/errors";
+import { ApiError, ValidationError } from "../../utils/errors";
 
 type OwmForecastResponse = {
   list: Array<{

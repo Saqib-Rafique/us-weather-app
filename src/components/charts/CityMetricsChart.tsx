@@ -24,15 +24,10 @@ export function CityMetricsChart({ snapshots }: Props) {
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
         data={data}
-        margin={{ top: 10, right: 40, left: 10, bottom: 20 }}
+        margin={{ top: 10, right: 85, left: 0, bottom: 10 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis
-          dataKey="city"
-          interval={0}
-          height={60}
-          padding={{ left: 20, right: 20 }}
-        />
+        <XAxis dataKey="city" interval={0} height={60} />
         <YAxis />
         <Tooltip />
         <Legend />

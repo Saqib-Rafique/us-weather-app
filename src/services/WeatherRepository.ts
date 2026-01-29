@@ -1,6 +1,6 @@
-import type { StateCatalogEntry } from "@domain/StateCatalog";
-import type { CityWeatherSnapshot } from "@domain/CityWeatherSnapshot";
-import type { StateWeatherResult } from "@domain/StateWeatherResult";
+import type { StateCatalogEntry } from "../domain/StateCatalog";
+import type { CityWeatherSnapshot } from "../domain/CityWeatherSnapshot";
+import type { StateWeatherResult } from "../domain/StateWeatherResult";
 import { OpenWeatherMapClient } from "./openWeather/OpenWeatherMapClient";
 
 export class WeatherRepository {

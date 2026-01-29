@@ -1,26 +1,60 @@
-import type { StateWeatherResult } from "@domain/StateWeatherResult";
-import { CityMetricsChart } from "./charts/CityMetricsChart";
-import { CityMetricsTable } from "./tables/CityMetricsTable";
+import { useGetStateSnapshotQuery } from "@services/api/weatherApi";
+import { CityMetricsChart } from "@components/charts/CityMetricsChart";
+import { CityMetricsTable } from "@components/tables/CityMetricsTable";
 
-type Props = { result: StateWeatherResult };
+type Props = {
+  stateCode: string;
+  stateName: string;
+  searchedAtIso: string;
+};
 
-export function StateWeatherPanel({ result }: Props) {
+export function StateWeatherPanel({
+  stateCode,
+  stateName,
+  searchedAtIso,
+}: Props) {
+  const { data, isLoading, isError, error } = useGetStateSnapshotQuery({
+    stateCode,
+  });
+
   return (
     <section className="card stateBlock">
       <div className="cardHeader">
         <div className="stateMeta">
           <h3 className="cardTitle">
-            {result.stateName} <span className="small">({result.stateCode})</span>
+            {stateName} <span className="small">({stateCode})</span>
           </h3>
-          <span className="small">Fetched: {new Date(result.createdAtIso).toLocaleString()}</span>
+          <span className="small">
+            Searched: {new Date(searchedAtIso).toLocaleString()}
+          </span>
         </div>
       </div>
+
       <div className="cardBody">
-        <div className="chartWrap">
-          <CityMetricsChart snapshots={result.cities} />
-        </div>
-        <CityMetricsTable snapshots={result.cities} />
+        {isLoading ? <div className="helper">Loading weather data…</div> : null}
+
+        {isError ? <div className="error">{formatRtkError(error)}</div> : null}
+
+        {data ? (
+          <>
+            <div className="chartWrap">
+              <CityMetricsChart snapshots={data.cities} />
+            </div>
+            <CityMetricsTable snapshots={data.cities} />
+          </>
+        ) : null}
       </div>
     </section>
   );
+}
+
+function formatRtkError(err: unknown): string {
+  if (!err) return "Unknown error";
+  if (typeof err === "string") return err;
+
+  const anyErr = err as any;
+  if (anyErr?.error && typeof anyErr.error === "string") return anyErr.error;
+  if (anyErr?.data?.message) return String(anyErr.data.message);
+  if (anyErr?.status) return `Request failed (${anyErr.status}).`;
+  return "Request failed.";
 }

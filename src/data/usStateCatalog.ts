@@ -1,4 +1,4 @@
-import type { StateCatalog } from "@domain/StateCatalog";
+import type { StateCatalog } from "../domain/StateCatalog";
 
 export function buildStateCatalog(): StateCatalog {
   return [
